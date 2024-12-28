@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newton-Raphson Yöntemi</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e3f2fd;
+            color: #333;
+        }
+        .header {
+            background-color: #1565c0;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        .container {
+            max-width: 700px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #1565c0;
+        }
+        input, button {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 1em;
+        }
+        input:focus {
+            outline: none;
+            border-color: #1565c0;
+            box-shadow: 0 0 5px rgba(21, 101, 192, 0.5);
+        }
+        button {
+            background-color: #1565c0;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0d47a1;
+        }
+        .result {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #e3f2fd;
+            border: 1px solid #bbdefb;
+            border-radius: 10px;
+        }
+        .result h2 {
+            color: #1565c0;
+        }
+        .footer {
+            text-align: center;
+            padding: 15px;
+            background-color: #1565c0;
+            color: white;
+            margin-top: 30px;
+        }
+        .footer a {
+            color: #bbdefb;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Newton-Raphson Yöntemi</h1>
+    </div>
+    <div class="container">
+        <form method="POST">
+            <div class="form-group">
+                <label for="equation">Denklem (örneğin, x**3 - x - 2):</label>
+                <input type="text" id="equation" name="equation" required>
+            </div>
+            <div class="form-group">
+                <label for="tolerance">Tolerans (örneğin, 6 için 1e-6):</label>
+                <input type="number" id="tolerance" name="tolerance" required>
+            </div>
+            <div class="form-group">
+                <label for="precision">Hassasiyet (örneğin, 6 için 6 ondalık basamak):</label>
+                <input type="number" id="precision" name="precision" required>
+            </div>
+            <button type="submit">Çöz</button>
+        </form>
+
+        {% if error %}
+            <div class="result">
+                <p style="color: red;">{{ error }}</p>
+            </div>
+        {% endif %}
+
+        {% if equation %}
+            <div class="result">
+                <h2>Sonuçlar</h2>
+                <p><strong>Denklem:</strong> {{ equation }}</p>
+                <p><strong>Türev:</strong> {{ derivative }}</p>
+                <p><strong>Pozitif Kökler:</strong> {{ positive_roots }}</p>
+                <p><strong>Negatif Kökler:</strong> {{ negative_roots }}</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
